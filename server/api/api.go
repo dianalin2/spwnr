@@ -7,6 +7,7 @@ import (
 	"mc.honki.ng/spwnr/logging"
 
 	"mc.honki.ng/spwnr/api/routes/ping"
+	"mc.honki.ng/spwnr/api/routes/servers"
 )
 
 func CreateApiRouter(logger logging.Logger) *chi.Mux {
@@ -15,6 +16,8 @@ func CreateApiRouter(logger logging.Logger) *chi.Mux {
 	r.Use(loggerMiddleware(logger))
 
 	r.Get("/ping", ping.Ping)
+	servers.Init()
+	r.Mount("/servers", servers.Router)
 
 	return r
 }
