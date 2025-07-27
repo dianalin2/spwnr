@@ -15,9 +15,11 @@ func CreateApiRouter(logger logging.Logger) *chi.Mux {
 
 	r.Use(loggerMiddleware(logger))
 
-	r.Get("/ping", ping.Ping)
-	servers.Init()
-	r.Mount("/servers", servers.Router)
+	pingRouter := ping.Init()
+	serverRouter := servers.Init()
+
+	r.Mount("/ping", pingRouter)
+	r.Mount("/servers", serverRouter)
 
 	return r
 }

@@ -7,11 +7,12 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-var Router chi.Router
+func Init() *chi.Mux {
+	router := chi.NewRouter()
 
-func Init() {
-	Router = chi.NewRouter()
-	Router.Get("/info", getInfo)
+	router.Get("/info", getInfo)
+
+	return router
 }
 
 type ServerResponse struct {

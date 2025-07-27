@@ -3,7 +3,17 @@ package ping
 import (
 	"encoding/json"
 	"net/http"
+
+	"github.com/go-chi/chi/v5"
 )
+
+func Init() *chi.Mux {
+	router := chi.NewRouter()
+
+	router.Get("/", Ping)
+
+	return router
+}
 
 type PingMessage struct {
 	Status string `json:"status"`
