@@ -3,8 +3,10 @@ package main
 import (
 	"net/http"
 	"github.com/go-chi/chi/v5"
+
 	"mc.honki.ng/spwnr/logging"
 	"mc.honki.ng/spwnr/api"
+	"mc.honki.ng/spwnr/database"
 )
 
 func createRoutes(logger logging.Logger) *chi.Mux {
@@ -21,6 +23,9 @@ func main() {
 	if err != nil {
 		panic("Failed to create logger: " + err.Error())
 	}
+
+	// Initialize Database connection
+	database.Init(logger)
 
 	server := &http.Server{
 		Addr:    addr,
